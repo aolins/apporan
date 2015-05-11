@@ -32,12 +32,32 @@ public class MainTest {
 
 
         assertEquals(calculatePrice(new String[]{
-                "Orange","Orange","Apple","Apple","Apple",
-                "Orange","Orange","Apple","Apple","Apple",
-                "Orange","Orange","Apple","Apple","Apple",
-                "Orange","Orange","Apple","Apple","Apple",
-                "Orange"    }), new BigDecimal(12*0.6+0.25*9).setScale(2, RoundingMode.HALF_UP)); //12 apples, nine oranges
+                "Orange", "Orange", "Apple", "Apple", "Apple",
+                "Orange", "Orange", "Apple", "Apple", "Apple",
+                "Orange", "Orange", "Apple", "Apple", "Apple",
+                "Orange", "Orange", "Apple", "Apple", "Apple",
+                "Orange"}), new BigDecimal(12 * 0.6 + 0.25 * 9).setScale(2, RoundingMode.HALF_UP)); //12 apples, nine oranges
+
+        assertEquals(calculatePrice(generate(10,10)),
+                new BigDecimal(10 * 0.6 + 0.25 * 10).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
+
+        assertEquals(calculatePrice(generate(100,100)),
+                new BigDecimal(100 * 0.6 + 0.25 * 100).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
 
 
+        assertEquals(calculatePrice(generate(12345,54321)),
+                new BigDecimal(12345 * 0.6 + 0.25 * 54321).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
+
+    }
+
+    private static String[] generate(int apples, int oranges){
+        String[] result = new String[apples+oranges];
+        for (int i = 0; i < apples; i++) {
+            result[i]= Main.APPLE;
+        }
+        for (int i = 0; i < oranges; i++) {
+            result [i+apples] = Main.ORANGE;
+        }
+        return result;
     }
 }
