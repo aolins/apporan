@@ -15,8 +15,8 @@ public class MainTest {
         assertEquals(calculatePrice(null), new BigDecimal(0)); //nothing provided
         assertEquals(calculatePrice(new String[]{}), new BigDecimal(0)); //empty array provided
 
-        assertEquals(calculatePrice(new String[]{"Apple"}), new BigDecimal(0.6)); //one Apple
-        assertEquals(calculatePrice(new String[]{"Orange"}), new BigDecimal(0.25)); //one Orange
+        assertEquals(calculatePrice(new String[]{"Apple"}), Main.APPLE_PRICE); //one Apple
+        assertEquals(calculatePrice(new String[]{"Orange"}), Main.ORANGE_PRICE); //one Orange
 
 
     }
