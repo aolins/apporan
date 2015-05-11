@@ -19,8 +19,24 @@ public class MainTest {
         assertEquals(calculatePrice(new String[]{"Apple"}), Main.APPLE_PRICE); //one Apple
         assertEquals(calculatePrice(new String[]{"Orange"}), Main.ORANGE_PRICE); //one Orange
 
-        assertEquals(calculatePrice(new String[]{"Apple", "","","apple"}), new BigDecimal(1.2).setScale(2, RoundingMode.HALF_UP)); //two apples
+        assertEquals(calculatePrice(new String[]{"Apple", "", "", "apple"}), new BigDecimal(1.2).setScale(2, RoundingMode.HALF_UP)); //two apples
 
+
+
+        assertEquals(calculatePrice(new String[]{
+                "Apple","Apple","Apple",
+                "Apple","Apple","Apple",
+                "Apple","Apple","Apple",
+                "Apple","Apple","Apple",
+                "Orange"    }), new BigDecimal(12*0.6+0.25).setScale(2, RoundingMode.HALF_UP)); //12 apples, one orange
+
+
+        assertEquals(calculatePrice(new String[]{
+                "Orange","Orange","Apple","Apple","Apple",
+                "Orange","Orange","Apple","Apple","Apple",
+                "Orange","Orange","Apple","Apple","Apple",
+                "Orange","Orange","Apple","Apple","Apple",
+                "Orange"    }), new BigDecimal(12*0.6+0.25*9).setScale(2, RoundingMode.HALF_UP)); //12 apples, nine oranges
 
 
     }
