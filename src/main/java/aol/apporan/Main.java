@@ -15,12 +15,14 @@ public class Main {
 
 
     public static void main(String[] args){
-
+        System.out.println(calculatePrice(args));
     }
 
     public static BigDecimal calculatePrice(String[] list){
+        if (list == null || list.length == 0) return new BigDecimal(0);
+        BigDecimal sum = new BigDecimal(0);
 
+        return sum;
 
-        return new BigDecimal(0);
     }
 }
