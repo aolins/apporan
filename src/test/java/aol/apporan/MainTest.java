@@ -1,6 +1,7 @@
 package aol.apporan;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.Assert.*;
 import static aol.apporan.Main.calculatePrice;
@@ -17,6 +18,9 @@ public class MainTest {
 
         assertEquals(calculatePrice(new String[]{"Apple"}), Main.APPLE_PRICE); //one Apple
         assertEquals(calculatePrice(new String[]{"Orange"}), Main.ORANGE_PRICE); //one Orange
+
+        assertEquals(calculatePrice(new String[]{"Apple", "","","apple"}), new BigDecimal(1.2).setScale(2, RoundingMode.HALF_UP)); //two apples
+
 
 
     }
