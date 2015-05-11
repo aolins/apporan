@@ -19,19 +19,37 @@ public class MainTest {
         assertEquals(calculatePrice(new String[]{"Apple"}), Main.APPLE_PRICE); //one Apple
         assertEquals(calculatePrice(new String[]{"Orange"}), Main.ORANGE_PRICE); //one Orange
 
+        assertEquals(calculatePrice(generate(1,0)),Main.APPLE_PRICE); // 1 apple =1
+        assertEquals(calculatePrice(generate(2,0)),Main.APPLE_PRICE); // 2 apples=1
+        assertEquals(calculatePrice(generate(3,0)),roundScale(1.2)); // 3 apples=2
+        assertEquals(calculatePrice(generate(4,0)),roundScale(1.2)); // 4 apples=2
+        assertEquals(calculatePrice(generate(5,0)),roundScale(1.8)); // 5 apples=3
+        assertEquals(calculatePrice(generate(6,0)),roundScale(1.8)); // 6 apples=3
+
+        assertEquals(calculatePrice(generate(0,1)),roundScale(0.25)); // 1 orange =1
+        assertEquals(calculatePrice(generate(0,2)),roundScale(0.5)); // 2 oranges=2
+        assertEquals(calculatePrice(generate(0,3)),roundScale(0.5)); // 3 oranges=2
+        assertEquals(calculatePrice(generate(0,4)),roundScale(0.75)); // 4 oranges=3
+        assertEquals(calculatePrice(generate(0,5)),roundScale(1)); // 5 oranges=4
+        assertEquals(calculatePrice(generate(0,6)),roundScale(1)); // 6 oranges=4
+
+
+        assertEquals(calculatePrice(generate(1,1)),roundScale(0.85)); // 1,1 = 1,1
+        assertEquals(calculatePrice(generate(2,1)),roundScale(0.85)); // 2,1 = 1,1
+
+        assertEquals(calculatePrice(generate(2,2)),roundScale(0.6 + 0.25*2)); // 2,2 = 1,2
+        assertEquals(calculatePrice(generate(1,2)),roundScale(0.6 + 0.25*2)); // 1,2 = 1,2
+
+        assertEquals(calculatePrice(generate(1,3)),roundScale(0.6 + 0.25*2)); // 1,3 = 1,2
+        assertEquals(calculatePrice(generate(2,3)),roundScale(0.6 + 0.25*2)); // 2,3 = 1,2
 
 
 
-        assertEquals(calculatePrice(generate(10,10)),
-                new BigDecimal(10 * 0.6 + 0.25 * 10).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
 
-        assertEquals(calculatePrice(generate(100,100)),
-                new BigDecimal(100 * 0.6 + 0.25 * 100).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
+    }
 
-
-        assertEquals(calculatePrice(generate(12345,54321)),
-                new BigDecimal(12345 * 0.6 + 0.25 * 54321).setScale(2, RoundingMode.HALF_UP)); //10 apples, 10 oranges);
-
+    private static BigDecimal roundScale(double input){
+        return new BigDecimal(input).setScale(2, RoundingMode.HALF_UP);
     }
 
     private static String[] generate(int apples, int oranges){
