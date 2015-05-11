@@ -20,17 +20,25 @@ public class Main {
     }
 
     public static BigDecimal calculatePrice(String[] list){
+
         if (list == null || list.length == 0) return new BigDecimal(0);
         BigDecimal sum = new BigDecimal(0);
 
+        int apples = 0;
+        int oranges = 0;
+
         for (String item: list){
             if (APPLE.equalsIgnoreCase(item)){
-                sum = sum.add(APPLE_PRICE);
+                apples++;
             }else if(ORANGE.equalsIgnoreCase(item)){
-                sum = sum.add(ORANGE_PRICE);
+                oranges++;
             }
         }
 
+        int applesOffer = apples / 2 + apples % 2;
+        int orangesOffer = (oranges / 3) * 2 + oranges % 3;
+        sum = APPLE_PRICE.multiply(new BigDecimal(applesOffer));
+        sum = sum.add(ORANGE_PRICE.multiply(new BigDecimal(orangesOffer)));
         return sum.setScale(2, RoundingMode.HALF_UP);
     }
 }
