@@ -32,6 +32,5 @@ public class Main {
         }
 
         return sum.setScale(2, RoundingMode.HALF_UP);
-
     }
 }
